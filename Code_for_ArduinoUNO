@@ -1,0 +1,125 @@
+#include<AFMotor.h> 
+int trig=A0; 
+int echo=A1; 
+float duration;
+float distance;
+AF_DCMotor motor1(1);
+AF_DCMotor motor2(2);
+AF_DCMotor motor3(3);
+AF_DCMotor motor4(1);
+void setup()
+{
+ //put your setup code here, to run once:
+pinMode(trig,OUTPUT);
+pinMode(echo,INPUT);
+Serial.begin(9600); 
+Motor1.setSpeed(255); 
+Motor2.setSpeed(255); 
+Motor3.setSpeed(255); 
+Motor4.setSpeed(255); }
+void loop() {
+ // put your main code here, to run repeatedly:
+distancefunction();
+digitalWrite(A5,LOW);
+delay(1);
+digitalWrite(A4,LOW);
+delay(1);
+digitalWrite(A3,LOW); delay(1);
+digitalWrite(A2,LOW);
+delay(1);
+
+if(distance>100){ 
+digitalWrite(A5,HIGH);
+forward4(); }
+if(distance>70&& distance<=100){ 
+digitalWrite(A5,HIGH);
+digitalWrite(A4,HIGH);
+forward3(); }
+if(distance>40 && distance<=70){ 
+digitalWrite(A5,HIGH);
+digitalWrite(A4,HIGH);
+digitalWrite(A3,HIGH);
+forward2(); }
+if(distance>20 && distance<=40){ 
+digitalWrite(A5,HIGH);
+digitalWrite(A4,HIGH);
+digitalWrite(A3,HIGH);
+digitalWrite(A2,HIGH);
+forward1(); }
+if(distance>0 && distance<=20){
+ Blink();
+ Stop(); }
+
+void Blink(){
+digitalWrite(A5,HIGH);
+digitalWrite(A4,HIGH);
+digitalWrite(A3,HIGH);
+digitalWrite(A2,HIGH);
+delay(200);
+digitalWrite(A5,LOW);
+digitalWrite(A4,LOW);
+digitalWrite(A3,LOW);
+digitalWrite(A2,LOW);
+
+delay(100); }
+
+void forward1(){
+motor1.run(FORWARD);
+motor2.run(FORWARD); 
+motor3.run(FORWARD);
+motor4.run(FORWARD);
+motor1.setSpeed(125);
+motor2.setSpeed(125);
+motor3.setSpeed(125);
+motor4.setSpeed(125); }
+
+void forward2(){
+motor1.run(FORWARD);
+motor2.run(FORWARD); 
+motor3.run(FORWARD);
+motor4.run(FORWARD);
+motor1.setSpeed(150);
+motor2.setSpeed(150);
+motor3.setSpeed(150);
+motor4.setSpeed(150); }
+
+void forward3(){
+motor1.run(FORWARD);
+motor2.run(FORWARD); 
+motor3.run(FORWARD);
+motor4.run(FORWARD);
+motor1.setSpeed(204);
+motor2.setSpeed(204);
+motor3.setSpeed(204);
+motor4.setSpeed(204); }
+
+void forward4(){
+motor1.run(FORWARD);
+motor2.run(FORWARD); 
+motor3.run(FORWARD);
+motor4.run(FORWARD);
+motor1.setSpeed(255);
+motor2.setSpeed(255);
+motor3.setSpeed(255);
+motor4.setSpeed(255);
+ }
+
+void Stop(){
+motor1.run(RELEASE);
+motor2.run(RELEASE);
+motor3.run(RELEASE);
+motor4.run(RELEASE); }
+
+void distancefunction(){
+ digitalWrite(trig,LOW);
+ delayMicroseconds(2);
+ digitalWrite(trig,HIGH);
+ delayMicroseconds(10); 
+ digitalWrite(trig,LOW);
+ duration=pulseIn(echo,HIGH);
+ distance=duration*0.034/2;
+ Serial.print("The distance is = ");
+ Serial.print(distance);
+ Serial.print("cm\n");
+ delay(100);
+}
