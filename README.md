@@ -1,1 +1,2 @@
 # Automatic_Speed_Controlled_Car
+The project aims to create a tool for enhancing automobile safety through obstacle detection and collision avoidance techniques. It employs an Arduino UNO, an Ultrasonic Sensor for distance sensing, and an LED for alarms. The system ensures reliable frontal distance measurement and triggers emergency responses via LED blinking. Performance evaluation is conducted through test runs and comparisons. 
